@@ -67,8 +67,49 @@ def highest_author(df):
     top_publishers = df["Book-Author"].value_counts().head(10)
     plt.figure(figsize=(12, 6))
     top_publishers.plot(kind="bar", color="skyblue")
-    plt.title("Top 10 Publishers with the Most Books")
-    plt.xlabel("Publisher")
+    plt.title("Top 10 Authors with Most Books")
+    plt.xlabel("Author")
     plt.ylabel("Count")
     plt.xticks(rotation=45, ha="right")
+    plt.show()
+
+
+def highest_ratings(df):
+    # Distribution of Book Ratings
+    plt.figure(figsize=(10, 6))
+    sns.histplot(df["Book-Ratings"], bins=20, kde=True)
+    plt.title("Distribution of Book Ratings")
+    plt.xlabel("Book Ratings")
+    plt.ylabel("Frequency")
+    plt.show()
+
+
+def ratings_and_year(df):
+    # Relationship between Book Ratings and Year of Publication
+    plt.figure(figsize=(12, 6))
+    sns.scatterplot(x="Year-Of-Publication", y="Book-Ratings", data=df)
+    plt.title("Relationship between Book Ratings and Year of Publication")
+    plt.xlabel("Year of Publication")
+    plt.ylabel("Book Ratings")
+    plt.show()
+
+
+def ratings_per_book(df):
+    # Count of ratings per book
+    plt.figure(figsize=(12, 6))
+    sns.countplot(x="Book-Ratings", data=df)
+    plt.title("Count of Ratings per Book")
+    plt.xlabel("Rating")
+    plt.ylabel("Count")
+    plt.show()
+
+
+def location_and_ratings(df):
+    # Visualize the top 10 locations with the most ratings
+    top_locations = df["Location"].value_counts().nlargest(10)
+    plt.figure(figsize=(12, 6))
+    sns.barplot(x=top_locations.values, y=top_locations.index, palette="viridis")
+    plt.title("Top 10 Locations with Most Ratings")
+    plt.xlabel("Number of Ratings")
+    plt.ylabel("Location")
     plt.show()
