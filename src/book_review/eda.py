@@ -16,100 +16,91 @@ class EdaAnalysis:
     This class contains all the functions needed for data reading,interpretation and cleaning.
     """
 
+    def __init__(self):
+        """ """
+        pass
 
-def __init__(self):
-    """ """
-    pass
+    def highest_publisher(df):
+        # Top 10 publishers with the most books
+        top_publishers = df["Publisher"].value_counts().head(10)
+        plt.figure(figsize=(12, 6))
+        top_publishers.plot(kind="bar", color="skyblue")
+        plt.title("Top 10 Publishers with the Most Books")
+        plt.xlabel("Publisher")
+        plt.ylabel("Count")
+        plt.xticks(rotation=45, ha="right")
+        plt.show()
 
+    def word_cloud(df):
+        wordcloud = WordCloud(width=800, height=400, background_color="white").generate(
+            " ".join(df["Book-Title"])
+        )
+        plt.figure(figsize=(10, 6))
+        plt.imshow(wordcloud, interpolation="bilinear")
+        plt.axis("off")
+        plt.title("Word Cloud for Book Titles")
+        plt.show()
 
-def highest_publisher(df):
-    # Top 10 publishers with the most books
-    top_publishers = df["Publisher"].value_counts().head(10)
-    plt.figure(figsize=(12, 6))
-    top_publishers.plot(kind="bar", color="skyblue")
-    plt.title("Top 10 Publishers with the Most Books")
-    plt.xlabel("Publisher")
-    plt.ylabel("Count")
-    plt.xticks(rotation=45, ha="right")
-    plt.show()
+    def distribution(df):
+        filtered_df = df[
+            (df["Year-Of-Publication"] >= 1800) & (df["Year-Of-Publication"] <= 2050)
+        ]
+        plt.figure(figsize=(12, 6))
+        plt.hist(
+            filtered_df["Year-Of-Publication"].dropna(),
+            bins=range(1800, 2051, 10),
+            edgecolor="black",
+        )
+        plt.title("Distribution of Publication Years")
+        plt.xlabel("Publication Year")
+        plt.ylabel("Count")
+        plt.grid(axis="y", linestyle="--", alpha=0.7)
+        plt.show()
 
+    def highest_author(df):
+        # Top 10 publishers with the most books
+        top_publishers = df["Book-Author"].value_counts().head(10)
+        plt.figure(figsize=(12, 6))
+        top_publishers.plot(kind="bar", color="skyblue")
+        plt.title("Top 10 Authors with Most Books")
+        plt.xlabel("Author")
+        plt.ylabel("Count")
+        plt.xticks(rotation=45, ha="right")
+        plt.show()
 
-def word_cloud(df):
-    wordcloud = WordCloud(width=800, height=400, background_color="white").generate(
-        " ".join(df["Book-Title"])
-    )
-    plt.figure(figsize=(10, 6))
-    plt.imshow(wordcloud, interpolation="bilinear")
-    plt.axis("off")
-    plt.title("Word Cloud for Book Titles")
-    plt.show()
+    def highest_ratings(df):
+        # Distribution of Book Ratings
+        plt.figure(figsize=(10, 6))
+        sns.histplot(df["Book-Ratings"], bins=20, kde=True)
+        plt.title("Distribution of Book Ratings")
+        plt.xlabel("Book Ratings")
+        plt.ylabel("Frequency")
+        plt.show()
 
+    def ratings_and_year(df):
+        # Relationship between Book Ratings and Year of Publication
+        plt.figure(figsize=(12, 6))
+        sns.scatterplot(x="Year-Of-Publication", y="Book-Ratings", data=df)
+        plt.title("Relationship between Book Ratings and Year of Publication")
+        plt.xlabel("Year of Publication")
+        plt.ylabel("Book Ratings")
+        plt.show()
 
-def distribution(df):
-    filtered_df = df[
-        (df["Year-Of-Publication"] >= 1800) & (df["Year-Of-Publication"] <= 2050)
-    ]
-    plt.figure(figsize=(12, 6))
-    plt.hist(
-        filtered_df["Year-Of-Publication"].dropna(),
-        bins=range(1800, 2051, 10),
-        edgecolor="black",
-    )
-    plt.title("Distribution of Publication Years")
-    plt.xlabel("Publication Year")
-    plt.ylabel("Count")
-    plt.grid(axis="y", linestyle="--", alpha=0.7)
-    plt.show()
+    def ratings_per_book(df):
+        # Count of ratings per book
+        plt.figure(figsize=(12, 6))
+        sns.countplot(x="Book-Ratings", data=df)
+        plt.title("Count of Ratings per Book")
+        plt.xlabel("Rating")
+        plt.ylabel("Count")
+        plt.show()
 
-
-def highest_author(df):
-    # Top 10 publishers with the most books
-    top_publishers = df["Book-Author"].value_counts().head(10)
-    plt.figure(figsize=(12, 6))
-    top_publishers.plot(kind="bar", color="skyblue")
-    plt.title("Top 10 Authors with Most Books")
-    plt.xlabel("Author")
-    plt.ylabel("Count")
-    plt.xticks(rotation=45, ha="right")
-    plt.show()
-
-
-def highest_ratings(df):
-    # Distribution of Book Ratings
-    plt.figure(figsize=(10, 6))
-    sns.histplot(df["Book-Ratings"], bins=20, kde=True)
-    plt.title("Distribution of Book Ratings")
-    plt.xlabel("Book Ratings")
-    plt.ylabel("Frequency")
-    plt.show()
-
-
-def ratings_and_year(df):
-    # Relationship between Book Ratings and Year of Publication
-    plt.figure(figsize=(12, 6))
-    sns.scatterplot(x="Year-Of-Publication", y="Book-Ratings", data=df)
-    plt.title("Relationship between Book Ratings and Year of Publication")
-    plt.xlabel("Year of Publication")
-    plt.ylabel("Book Ratings")
-    plt.show()
-
-
-def ratings_per_book(df):
-    # Count of ratings per book
-    plt.figure(figsize=(12, 6))
-    sns.countplot(x="Book-Ratings", data=df)
-    plt.title("Count of Ratings per Book")
-    plt.xlabel("Rating")
-    plt.ylabel("Count")
-    plt.show()
-
-
-def location_and_ratings(df):
-    # Visualize the top 10 locations with the most ratings
-    top_locations = df["Location"].value_counts().nlargest(10)
-    plt.figure(figsize=(12, 6))
-    sns.barplot(x=top_locations.values, y=top_locations.index, palette="viridis")
-    plt.title("Top 10 Locations with Most Ratings")
-    plt.xlabel("Number of Ratings")
-    plt.ylabel("Location")
-    plt.show()
+    def location_and_ratings(df):
+        # Visualize the top 10 locations with the most ratings
+        top_locations = df["Location"].value_counts().nlargest(10)
+        plt.figure(figsize=(12, 6))
+        sns.barplot(x=top_locations.values, y=top_locations.index, palette="viridis")
+        plt.title("Top 10 Locations with Most Ratings")
+        plt.xlabel("Number of Ratings")
+        plt.ylabel("Location")
+        plt.show()
