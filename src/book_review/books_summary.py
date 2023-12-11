@@ -18,19 +18,6 @@ class data:
         """ """
         pass
 
-    def cleaning(df, review, user):
-        # Delete the last 3 columns
-        df = df.iloc[:, :-3]
-        cleaned_df = df.dropna(subset=["Year-Of-Publication"])
-        cleaned_df["Year-Of-Publication"] = pd.to_numeric(
-            cleaned_df["Year-Of-Publication"], errors="coerce"
-        )
-        cleaned_df.insert(5, "Book-Ratings", review["Book-Rating"])
-        cleaned_df.insert(6, "Location", user["Location"])
-        return cleaned_df
-
-    # cleaned_df = cleaning()
-
     def details(df):
         """
         Function used to show some of the initial content of the dataset to get an idea on how the data looks like.
