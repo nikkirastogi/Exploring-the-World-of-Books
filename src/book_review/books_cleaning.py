@@ -5,6 +5,11 @@ warnings.filterwarnings("ignore")
 
 
 class cleaning:
+    """ """
+
+    def __init__(self):
+        pass
+
     def merging(df, review):
         # Delete the last 3 columns
         cleaned_df = df.iloc[:, :-3]
