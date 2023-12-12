@@ -1,5 +1,5 @@
 """
-Importing the necessary libraries.
+This module defines the BooksEDA class for exploratory data analysis (EDA) on book data.
 """
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,15 +12,28 @@ warnings.filterwarnings("ignore")
 
 class BooksEDA:
     """
-    This class contains all the functions needed for data reading,interpretation and cleaning.
+    This class contains functions for exploratory data analysis (EDA) on book data.
     """
 
-    def __init__(data):
-        """ """
+    def __init__(self, data):
+        """
+        Initialize the BooksEDA object.
+
+        Parameters:
+        - data (pandas.DataFrame): The book data.
+        """
         self.df = data
 
     def highest_publisher(self):
-        # Top 10 publishers with the most books
+        """
+        Plot a bar chart of the top 10 publishers with the most books.
+
+        This method generates a bar chart showing the distribution of books among
+        the top 10 publishers based on the provided book data.
+
+        Returns:
+        None
+        """
         top_publishers = self.df["Publisher"].value_counts().head(10)
         plt.figure(figsize=(12, 6))
         top_publishers.plot(kind="bar", color="skyblue")
@@ -30,7 +43,16 @@ class BooksEDA:
         plt.xticks(rotation=45, ha="right")
         plt.show()
 
-    def word_cloud(self):
+    def df_word_cloud(self):
+        """
+        Generate and display a word cloud for book titles.
+
+        This method creates a word cloud based on the book titles and displays it
+        using the WordCloud library.
+
+        Returns:
+        None
+        """
         wordcloud = WordCloud(width=800, height=400, background_color="white").generate(
             " ".join(self.df["Book-Title"])
         )
@@ -41,6 +63,15 @@ class BooksEDA:
         plt.show()
 
     def distribution(self):
+        """
+        Plot a histogram of the distribution of publication years.
+
+        This method generates a histogram showing the distribution of publication
+        years for books, filtering out unrealistic values.
+
+        Returns:
+        None
+        """
         filtered_df = self.df[
             (self.df["Year-Of-Publication"] >= 1800) & (self.df["Year-Of-Publication"] <= 2050)
         ]
@@ -57,10 +88,18 @@ class BooksEDA:
         plt.show()
 
     def highest_author(self):
-        # Top 10 publishers with the most books
-        top_publishers = self.df["Book-Author"].value_counts().head(10)
+        """
+        Plot a bar chart of the top 10 authors with the most books.
+
+        This method generates a bar chart showing the distribution of books among
+        the top 10 authors based on the provided book data.
+
+        Returns:
+        None
+        """
+        top_authors = self.df["Book-Author"].value_counts().head(10)
         plt.figure(figsize=(12, 6))
-        top_publishers.plot(kind="bar", color="skyblue")
+        top_authors.plot(kind="bar", color="skyblue")
         plt.title("Top 10 Authors with Most Books")
         plt.xlabel("Author")
         plt.ylabel("Count")
@@ -68,7 +107,14 @@ class BooksEDA:
         plt.show()
 
     def highest_ratings(self):
-        # Distribution of Book Ratings
+        """
+        Plot a histogram of the distribution of book ratings.
+
+        This method generates a histogram showing the distribution of book ratings.
+
+        Returns:
+        None
+        """
         plt.figure(figsize=(10, 6))
         sns.histplot(self.df["Book-Ratings"], bins=20, kde=True)
         plt.title("Distribution of Book Ratings")
@@ -77,7 +123,15 @@ class BooksEDA:
         plt.show()
 
     def ratings_and_year(self):
-        # Relationship between Book Ratings and Year of Publication
+        """
+        Plot a scatter plot showing the relationship between book ratings and year of publication.
+
+        This method generates a scatter plot to visualize the relationship between
+        book ratings and the year of publication.
+
+        Returns:
+        None
+        """
         plt.figure(figsize=(12, 6))
         sns.scatterplot(x="Year-Of-Publication", y="Book-Ratings", data=self.df)
         plt.title("Relationship between Book Ratings and Year of Publication")
@@ -86,20 +140,18 @@ class BooksEDA:
         plt.show()
 
     def ratings_per_book(self):
-        # Count of ratings per book
+        """
+        Plot a count plot showing the distribution of ratings per book.
+
+        This method generates a count plot to visualize the distribution of ratings
+        per book.
+
+        Returns:
+        None
+        """
         plt.figure(figsize=(12, 6))
         sns.countplot(x="Book-Ratings", data=self.df)
         plt.title("Count of Ratings per Book")
         plt.xlabel("Rating")
         plt.ylabel("Count")
-        plt.show()
-
-    def location_and_ratings(self):
-        # Visualize the top 10 locations with the most ratings
-        top_locations = self.df["Location"].value_counts().nlargest(10)
-        plt.figure(figsize=(12, 6))
-        sns.barplot(x=top_locations.values, y=top_locations.index, palette="viridis")
-        plt.title("Top 10 Locations with Most Ratings")
-        plt.xlabel("Number of Ratings")
-        plt.ylabel("Location")
         plt.show()

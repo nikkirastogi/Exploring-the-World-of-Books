@@ -1,5 +1,7 @@
 """
-Importing the necessary libraries.
+BooksSummary Module
+
+This module defines the BooksSummary class, which contains functions for data reading, interpretation, and basic summary statistics.
 
 """
 
@@ -11,45 +13,68 @@ warnings.filterwarnings("ignore")
 
 class BooksSummary:
     """
-    This class contains all the functions needed for data reading,interpretation and cleaning.
+    This class contains functions for data reading, interpretation, and basic summary statistics.
     """
 
     def __init__(self, data):
-        """ """
+        """
+        Initialize the BooksSummary object.
+
+        Parameters:
+        - data (pandas.DataFrame): The dataset to be analyzed.
+        """
         self.df = data
 
     def df_details(self):
         """
-        Function used to show some of the initial content of the dataset to get an idea on how the data looks like.
+        Display the first few rows of the dataset to provide an initial overview.
+
+        Returns:
+        pandas.DataFrame: A preview of the dataset.
         """
         return self.df.head()
 
     def df_attributes(self):
         """
-        Function used to show the attributes of dataset.
+        Get the names of the attributes (columns) in the dataset.
+
+        Returns:
+        Index: The attribute names.
         """
         return self.df.columns
 
     def df_info(self):
         """
-        This function shows the details of the attributes such as count of non-null values and data type.
+        Display information about the dataset, including the count of non-null values and data types.
+
+        Returns:
+        None
         """
         return self.df.info()
 
     def df_null_values(self):
         """
-        Function showing the count of non-null values of each attributes.
+        Get the count of non-null values for each attribute in the dataset.
+
+        Returns:
+        pandas.Series: Count of non-null values for each attribute.
         """
         return pd.isnull(self.df).sum()
 
     def df_shape(self):
         """
-        Function showing the dimension of the dataset.
+        Get the dimensions (number of rows and columns) of the dataset.
+
+        Returns:
+        tuple: The number of rows and columns in the dataset.
         """
         return self.df.shape
 
     def df_describe(self):
         """
-        Function used to see the statistical summary of data
+        Display basic statistical summary of the dataset.
+
+        Returns:
+        pandas.DataFrame: Statistical summary of the dataset.
         """
         return self.df.describe()
