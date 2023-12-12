@@ -1,3 +1,7 @@
+"""
+This module have class BooksInferences for performing inference and visualization on book data.
+
+"""
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -69,116 +73,41 @@ class BooksInference:
         # Step 3: Plot the Relationship
         plt.figure(figsize=(10, 6))
         sns.scatterplot(x='Book Count', y='Average Rating', data=author, alpha=0.5)
-        #plt.scatter(author_data['Book Count'], author_data['Average Rating'], alpha=0.5)
         plt.title('Relationship Between Author\'s Book Count and Average Rating')
         plt.xlabel('Number of Books')
         plt.ylabel('Average Rating')
         plt.grid(True)
         return plt.show()
         
-    def plot_scatter2(self):
+
+    def ratings_and_year(self):
         """
-        Plot a scatter plot to visualize the relationship between an author's average rating and number of books.
+        Plot a scatter plot showing the relationship between book ratings and year of publication.
+
+        This method generates a scatter plot to visualize the relationship between
+        book ratings and the year of publication.
 
         Returns:
         None
         """
-        
-        # Step 1: Calculate Author-wise Average Ratings
-        average_ratings = self.df.groupby('Book-Author')['Book-Ratings'].mean()
-
-        # Step 2: Count the Number of Books per Author
-        book_counts = self.df['Book-Author'].value_counts()
-
-        # Step 3: Plot the Relationship
         plt.figure(figsize=(12, 6))
-        #sns.scatterplot(x='Book Count', y='Average Rating', data=author_data, alpha=0.5)
-        plt.scatter(book_counts, average_ratings, alpha=0.5)
-        plt.title('Relationship between Author\'s Average Rating and Number of Books')
-        plt.xlabel('Number of Books')
-        plt.ylabel('Average Rating')
-        return plt.show()
+        sns.scatterplot(x="Year-Of-Publication", y="Book-Ratings", data=self.df)
+        plt.title("Relationship between Book Ratings and Year of Publication")
+        plt.xlabel("Year of Publication")
+        plt.ylabel("Book Ratings")
+        plt.show()
 
-    def predict1(self):
-        """
-        Train a linear regression model to predict book ratings based on author, publication year, and evaluate the model.
-
-        Returns:
-        None
-        """
-        
-        # Assume 'Book-Author' and 'Year-Of-Publication' are features for prediction
-        X = self.df[['Book-Author', 'Year-Of-Publication']]
-        y = self.df['Book-Ratings']
-
-        # Convert categorical features to numerical using one-hot encoding
-        X = pd.get_dummies(X, columns=['Book-Author'], drop_first=True)
-
-        # Split the data into training and testing sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-        # Standardize the features
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
-
-        # Train a Linear Regression model
-        model = LinearRegression()
-        model.fit(X_train_scaled, y_train)
-
-        # Make predictions on the test set
-        predictions = model.predict(X_test_scaled)
-
-        # Evaluate the model
-        mse = mean_squared_error(y_test, predictions)
-        print(f'Mean Squared Error: {mse}')
-        
-        
-    def predict2(self):
-        """
-        Train a linear regression model to predict publication year based on author, book ratings, and evaluate the model.
-
-        Returns:
-        None
-        """
-        
-        # Assume 'Book-Author' and 'Year-Of-Publication' are features for prediction
-        X = self.df[['Book-Author', 'Book-Ratings']]
-        y = self.df['Year-Of-Publication']
-
-        # Convert categorical features to numerical using one-hot encoding
-        X = pd.get_dummies(X, columns=['Book-Author'], drop_first=True)
-
-        # Split the data into training and testing sets
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-        # Standardize the features
-        scaler = StandardScaler()
-        X_train_scaled = scaler.fit_transform(X_train)
-        X_test_scaled = scaler.transform(X_test)
-
-        # Train a Linear Regression model
-        model = LinearRegression()
-        model.fit(X_train_scaled, y_train)
-
-        # Make predictions on the test set
-        predictions = model.predict(X_test_scaled)
-
-        # Evaluate the model
-        mse = mean_squared_error(y_test, predictions)
-        print(f'Mean Squared Error: {mse}')
-        
         
     def corr_rating_year(self):
         cleaned_df = self.df[self.df['Book-Ratings'] != 0]
 
         # Scatter plot to visualize the correlation between 'Book-Ratings' and 'Year-Of-Publication'
         plt.figure(figsize=(12, 6))
-        sns.scatterplot(x=cleaned_df['Year-Of-Publication'], y=scleaned_df['Book-Ratings'], data=self.df, alpha=0.5)
+        sns.scatterplot(x=cleaned_df['Year-Of-Publication'], y=cleaned_df['Book-Ratings'], data=self.df, alpha=0.5)
         plt.title('Correlation between Book Ratings and Year of Publication')
         plt.xlabel('Year of Publication')
         plt.ylabel('Book Ratings')
-        plt.xlim(1800, max(obj['Year-Of-Publication']))
+        plt.xlim(1800, max(cleaned_df['Year-Of-Publication']))
         return plt.show()
         
         

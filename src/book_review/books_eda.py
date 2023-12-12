@@ -13,6 +13,7 @@ warnings.filterwarnings("ignore")
 class BooksEDA:
     """
     This class contains functions for exploratory data analysis (EDA) on book data.
+
     """
 
     def __init__(self, data):
@@ -122,23 +123,7 @@ class BooksEDA:
         plt.ylabel("Frequency")
         plt.show()
 
-    def ratings_and_year(self):
-        """
-        Plot a scatter plot showing the relationship between book ratings and year of publication.
-
-        This method generates a scatter plot to visualize the relationship between
-        book ratings and the year of publication.
-
-        Returns:
-        None
-        """
-        plt.figure(figsize=(12, 6))
-        sns.scatterplot(x="Year-Of-Publication", y="Book-Ratings", data=self.df)
-        plt.title("Relationship between Book Ratings and Year of Publication")
-        plt.xlabel("Year of Publication")
-        plt.ylabel("Book Ratings")
-        plt.show()
-
+    
     def ratings_per_book(self):
         """
         Plot a count plot showing the distribution of ratings per book.
