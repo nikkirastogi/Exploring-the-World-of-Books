@@ -9,58 +9,47 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-class data:
+class BooksSummary:
     """
     This class contains all the functions needed for data reading,interpretation and cleaning.
     """
 
-    def __init__(self):
+    def __init__(self, data):
         """ """
-        pass
+        self.df = data
 
-    def details(df):
+    def df_details(self):
         """
         Function used to show some of the initial content of the dataset to get an idea on how the data looks like.
         """
-        return df.head()
+        return self.df.head()
 
-    def attributes(df):
+    def df_attributes(self):
         """
         Function used to show the attributes of dataset.
         """
-        return df.columns
+        return self.df.columns
 
-    def info(df):
+    def df_info(self):
         """
         This function shows the details of the attributes such as count of non-null values and data type.
         """
-        info = df.info()
-        return info
+        return self.df.info()
 
-    def null_values(df):
+    def df_null_values(self):
         """
         Function showing the count of non-null values of each attributes.
         """
-        null_values = pd.isnull(df).sum()
-        return null_values
+        return pd.isnull(self.df).sum()
 
-    def shape(df):
+    def df_shape(self):
         """
         Function showing the dimension of the dataset.
         """
-        shape = df.shape
-        return shape
+        return self.df.shape
 
-    def describe(df):
+    def df_describe(self):
         """
         Function used to see the statistical summary of data
         """
-        describe = df.describe()
-        return describe
-
-    def data_type(df):
-        """
-        Function used to see datatypes of attributes
-        """
-        data_types = df.dtypes
-        return data_types
+        return self.df.describe()

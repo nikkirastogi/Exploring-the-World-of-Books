@@ -4,7 +4,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 from bs4 import BeautifulSoup
 
-class BookScraper:
+class BooksScraper:
     def __init__(self, url):
         self.url = url
 
