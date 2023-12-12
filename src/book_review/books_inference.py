@@ -169,3 +169,16 @@ class BooksInference:
         print(f'Mean Squared Error: {mse}')
         
         
+    def corr_rating_year(self):
+        cleaned_df = self.df[self.df['Book-Ratings'] != 0]
+
+        # Scatter plot to visualize the correlation between 'Book-Ratings' and 'Year-Of-Publication'
+        plt.figure(figsize=(12, 6))
+        sns.scatterplot(x=cleaned_df['Year-Of-Publication'], y=scleaned_df['Book-Ratings'], data=self.df, alpha=0.5)
+        plt.title('Correlation between Book Ratings and Year of Publication')
+        plt.xlabel('Year of Publication')
+        plt.ylabel('Book Ratings')
+        plt.xlim(1800, max(obj['Year-Of-Publication']))
+        return plt.show()
+        
+        
