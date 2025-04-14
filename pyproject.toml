@@ -1,29 +1,38 @@
+
 [build-system]
-requires = ["setuptools>=40.6.0", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Exploring-the-World-of-Books"
-authors = [{name = "Nikki Rastogi", email = "nrastog1@mail.yu.edu"}
-,{name = "Arun Mathew", email = ""}, {name = "Aquib Hussain", email = ""}]
+name = "exploring-the-world-of-books"
 version = "0.1.0"
-description = "Analyze the world of book and recommend which book is to read by performing EDA,solving Researched Questions"
+description = "Analyze the world of books and recommend what to read through EDA and research-based questions."
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.9"
+
+authors = [
+    {name = "Nikki Rastogi", email = "nrastog1@mail.yu.edu"}
+]
+
 dependencies = [
     "matplotlib>=3.4",
     "numpy>=1.21",
     "pandas>=1.3",
     "seaborn>=0.11",
-    "scikit-learn>=0.24,"
+    "scikit-learn>=0.24",
+    "selenium>=4.0",
+    "webdriver-manager>=3.5",
+    "wordcloud>=1.8"
 ]
-
 
 [project.urls]
 homepage = "https://github.com/nikkirastogi"
-repository = "https://github.com/nikkirastogi/Exploring-the-World-of-Books/tree/main/src"
+repository = "https://github.com/nikkirastogi/Exploring-the-World-of-Books"
 documentation = "https://github.com/nikkirastogi/Exploring-the-World-of-Books/blob/main/README.md"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
